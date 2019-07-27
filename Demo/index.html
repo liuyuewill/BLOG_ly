@@ -1,0 +1,78 @@
+<!doctype html>
+<head>
+  <title>test</title>
+</head>
+<body>
+  <div id="loginBtn">click</div>
+  <div id="backAction">backAction</div>
+  <script>
+    const createLoginLayer = function () {
+      const div = document.createElement('div')
+      div.innerHTML = 'HELLO WORLD'
+      div.style.display = 'none'
+      document.body.appendChild(div)
+      return div
+    }
+    function getSingle(fn) {
+        let res = null  // 重点部分，是个闭包
+        return function () {
+          if (!res){
+            res = fn.apply(this, arguments)
+          }
+          return res
+        }
+      }
+
+      const createSingleLoginLayer = getSingle(createLoginLayer)
+      document.getElementById('loginBtn').onclick = function () {
+        let loginLayer = createSingleLoginLayer()
+        loginLayer.style.display = 'block'
+      }
+
+
+    // 练习命令模式 start
+    let actionType = {
+      openDoor(){
+          console.log('openDoor')
+      },
+      washHands(){
+          console.log('washHands')
+      },
+      playCats(){
+          console.log('playCats')
+      },
+      openComputer(){
+          console.log('openComputer')
+      }
+    }
+
+    function actionCommand(receiver, state){
+        return function () {
+          receiver[state]()
+        }
+    }
+
+    let press = {
+        '113': 'openDoor',
+        '119': 'washHands',
+        '101': 'playCats',
+        '114': 'openComputer'
+    }
+
+    let commandTask = []
+    document.onkeypress = function(e){
+        let keyCode = e.keyCode
+        let command = actionCommand(actionType, press[keyCode])
+        commandTask.push(command)
+        command()
+    }
+    document.getElementById('backAction').onclick = function(){
+      while (commandTask.length){
+        let command = commandTask.shift()
+        command()
+      }
+    }
+    // 练习命令模式 end
+  </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+### 扩展运算符（spread）三个点
+  - 将一个数组，变为参数序列。
+
+        是rest参数的逆运算：function(...nums)，传入的序列参数会被放在数组nums里
+        console.log(...[1, 2, 3]) // 1 2 3
+
+  - 应用场景5个
+    - 用在函数的参数里，取代apply和arguments
+
+          getAA(a,b,c), 参数是序列
+
+          - 函数要的参数是序列，如果你要传个数组进来，怎么办？
+            - 旨在序列化一个数组
+            - es5: getAA.apply(null, arr)
+            - es6: getAA(...arr)
+
+          - 函数的rest用法：getAA里面要把参数变成数组来用。
+            - 旨在得一个数组
+            - es5是用arguments
+            - es6是只需...nums,这个nums是个真正的数组===[a,b,c]
+    - 复制数组（浅拷贝）
+
+          let a1 = [1,2,4]
+          let ar = [...a1] // [1,2,4]
+    - 合并数组（浅拷贝）
+      [...a1, ...a2]
+    - 和解构赋值配合使用，取得一个数组中某几个组成的小数组【只能放最后一位】
+
+          const [first, ...rest] = [1, 2, 3, 4, 5];
+          first // 1
+          rest  // [2, 3, 4, 5]
+          你就再也不用es5中的写法：const rest = [1, 2, 3, 4, 5].slice(1)
+
+          const [...first, rest] = [1, 2, 3, 4, 5];
+          first // 报错
+    - 将某些数据结构转为转为真正的数组
+
+          字符串： [...'hello'] // [ "h", "e", "l", "l", "o" ]
+          arguments:  [...arguments]
+          NodeList对象:  [...document.querySelectorAll('div')]
+### Array.from( )：将类数组转为真正的数组
+
+  - 类数组有2种：
+    - 类似数组的对象（array-like object）
+    - 可遍历的对象（iterable）（包括 ES6 新增的数据结构 Set 和 Map）
+  - 应用场景2个
+
+        function foo() {
+          var args = Array.from(arguments);  【...也能做到】
+          // ...
+        }
+
+        // NodeList对象
+        let ps = document.querySelectorAll('p');  【...也能做到】
+        Array.from(ps).filter(p => {
+          return p.textContent.length > 100;
+        });
+  - 第2个参数，一个函数，类似map。第3个参，函数内this的按向
+
+        Array.from(arrayLike, x => x * x);
+        // 等同于
+        Array.from(arrayLike).map(x => x * x);
+
+
+        取出DOM节点的文本内容
+        let spans = document.querySelectorAll('span.name');
+        // Array.from()
+        let names2 = Array.from(spans, s => s.textContent)
+
+   - 所以综合上面语法来看，个人觉得，Array.from()把类数组转成真数组的功能，...也能做到，...再给合map，就是Array.from(arr, fun)的功能了
+
+
+### Array.of()
+
+        只有一个参数时，表示数组的长度，只有参数不少于2个时，才会返回一个由参数组成的新数组
+        Array() // []
+        Array(3) // [, , ,]
+        Array(3, 11, 8) // [3, 11, 8]
+
+        改进：
+        Array.of(3, 11, 8) // [3,11,8]
+        Array.of(3) // [3]
+        Array.of(3).length // 1
+### copyWithin()
+
+        在数组内让一部分item覆盖其他item
+        暂没发现应用场景
+
+### find (function(currentVal, currentIndex, currentArr), this指定为此对象 )： 返回第一个符合条件的成员，否则返undefined
+### findIndex : 返回第一个符合条件成员的位置，如果所有都不符合条件，则返-1。第一个入参为函数，函数的参数和find一样
+
+### fill() 填充一个数组
+
+    ['a', 'b', 'c'].fill(7)
+    // [7, 7, 7]
+
+    new Array(3).fill(7)
+    // [7, 7, 7]
+
+### entries( ) 
+对键值对遍历
+### keys( ) 
+对键名遍历，就是遍历[0,1,2]
+### values( ) 
+对元素遍历
+
+    for (let elem of ['a', 'b'].values()) {
+      console.log(elem);
+    }
+    // 'a'
+    // 'b'
+### includes()
+返回一个布尔值，表示某个数组是否包含给定的值,第二个参数表示搜索的起始位置，默认为0
+
+    es5：
+    indexOf的缺点：使用严格相等运算符（===）进行判断，这会导致对NaN的误判
+    if (arr.indexOf(el) !== -1) {
+      // ...
+    }
+
+    一个兼容性写法：
+    let contain = (function() {
+      Array.prototype.includes ? 
+      (arr, val) => arr.includes(val) :
+      (arr, val) => arr.some(el => el === val)
+    })()
+### every()
+是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
+### some()
+是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
+### flat()/flatMap()
+
+    arr.flat() // 可将多维数组拉平，默认参数是1, 如果想拉平所有层，可以arr.flat(Infinity)
+
+    arr.flatMap((val, index, arr) => { 
+      // 会先对arr执行map函数操作，返回一个新数组，再对新数组进行flat()
+      // 因此，flatMap()只能展开一层数组
+    }, objThis) 
+
+    拉平数组的其他方法：
+    ？？
+### 数组的空位
+es5对空位的处理：
+- forEach(), filter(), reduce(), every() 和some()都会跳过空位。
+
+      // forEach方法
+      [,'a'].forEach((x,i) => console.log(i)); // 1
+
+      // filter方法
+      ['a',,'b'].filter(x => true) // ['a','b']
+
+      // every方法
+      [,'a'].every(x => x==='a') // true
+
+      // reduce方法
+      [1,,2].reduce((x,y) => x+y) // 3
+
+      // some方法
+      [,'a'].some(x => x !== 'a') // false
+- map()会跳过空位，但会保留这个值
+
+      // map方法
+      [,'a'].map(x => 1) // [,1]
+- join()和toString()会将空位视为undefined，而undefined和null会被处理成空字符串。
+
+      // join方法
+      [,'a',undefined,null].join('#') // "#a##"
+
+      // toString方法
+      [,'a',undefined,null].toString() // ",a,,"
+
+es6: 明确将空位转为undefined
+
+    Array.from(['a',,'b'])
+    // [ "a", undefined, "b" ]
+
+    [...['a',,'b']]
+    // [ "a", undefined, "b" ]
+
+
+    let arr = [, ,];
+    for (let i of arr) {
+      console.log(1);
+    }
+    // 1
+    // 1
+
+    entries()、keys()、values()、find()和findIndex()会将空位处理成undefined。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****
+
+
+
+
+
+
+
+
+
+
+### arr有很多api: https://juejin.im/post/5acb6186518825556a72b79b

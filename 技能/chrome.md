@@ -1,0 +1,20 @@
+#### debugger调试
+- 断点调试
+
+      Pause/Resume script execution：停止当前的断点调试, 跳到下一个断点
+      Step over next function call：继续执行下一行代码，这个方式不会进入函数（f10）
+      Step into next function call：跳入函数中去（f11）
+      Step out of current function：跳出当前执行函数。
+      Deactive/Active all breakpoints：关闭/开启所有断点（不会取消）。
+      Pause on exceptions：异常情况自动断点设置。
+- 查找和切换文件
+
+      contrl + p
+      enter
+- 格式化代码
+
+    点一下{}
+
+### chrome快捷键
+    无痕模式: ctrl + shift + n
+    清空console：ctrl + l 
