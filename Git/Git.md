@@ -27,10 +27,7 @@
       1094adb (HEAD -> master) HEAD@{2}: commit: append GPL
       e475afc HEAD@{3}: commit: add distributed
       eaadf4e HEAD@{4}: commit (initial): wrote a readme file
-#### 
+####
 - 工作区
 - 暂存区：git add .就是把工作区的内容，添加到stage暂存区
 - 远端当前分支：git commit -m ''就是一次性，把stage里的内容推送到当前分支
-- test1
-- test2
-- test3
