@@ -6,6 +6,38 @@
   <div id="loginBtn">click</div>
   <div id="backAction">backAction</div>
   <script>
+    // 练习状态模式start
+    function Light(){
+        this.status = 'off'
+    }
+
+    Light.prototype.enter = function (){
+        if (this.status === 'on') {
+            this.status = 'off'
+            console.log('off')
+        } else if (this.status === 'off') {
+            this.status = 'on'
+            console.log('on')
+        }
+    }
+
+    Light.prototype.init = function () {
+        let self = this
+        let btn = document.createElement('button')
+        btn.innerHTML = '开关'
+        document.body.appendChild(btn)
+
+        btn.onclick = function(){
+            self.enter()
+        }
+
+    }
+    let lig = new Light()
+    lig.init()
+    // 练习状态模式end
+
+
+
     const createLoginLayer = function () {
       const div = document.createElement('div')
       div.innerHTML = 'HELLO WORLD'
