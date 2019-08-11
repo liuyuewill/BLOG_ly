@@ -20,5 +20,7 @@
 
 ## 同一分支
 #### rebase 命令还能帮你修改 commit 记录
-先去目标分支：git checkout dev
-再修改commit记录：git rebase -i HEAD~4
+        如果dev上有这几个记录：c0 -> c1 -> c2 ->c3
+        先去目标分支：git checkout dev
+        再修改commit记录：git rebase -i HEAD~4
+        执行该命令 shell 会进入交互模式（-i）
