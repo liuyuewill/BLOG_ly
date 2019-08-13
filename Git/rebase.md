@@ -1,7 +1,7 @@
 ## 不同分支
 问题：从master上开一个dev分支，在dev上提交了一个commit，叫它c1，
 你的同事在master提交了一个c0，并且push到了远程分支上，你现在，
-需要将master分支上的内容，push到你本地的dev上，怎么办？
+需要将master分支上的内容，pull到你本地的dev上，怎么办？
 
 - 法一merge:
 
