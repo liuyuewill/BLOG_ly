@@ -148,6 +148,15 @@
     // order( 3, true, 500 )
     // console.log('order', order);
     console.log('order', order500.after(order200));
+
+    function Animal (type, sound) {
+      this.sound = sound
+      this.type = type
+    }
+    Animal.prototype.makeSound = function () {
+      console.log(this.sound);
+    }
+
   </script>
 </body>
 </html>
