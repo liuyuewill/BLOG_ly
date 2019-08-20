@@ -15,58 +15,19 @@
   <div id="root"></div>
 
   <script type="text/babel">
-
-    function LoginButton(props) {
-      return (
-        <button onClick={props.onClick}>
-          Login
-        </button>
-      );
+    function NumberList (props) {
+      const arr = props.numbers
+      const itemList = arr.map((number) => {
+          return (<li key={number.toString()}>{number}</li>)
+      })
+      return (<ul>{itemList}</ul>)
     }
-
-    function LogoutButton(props) {
-      return (
-        <button onClick={props.onClick}>
-          Logout
-        </button>
-      );
-    }
-
-    class Page extends React.Component{
-      constructor(props){
-        super(props)
-        this.state = {isLogin: true}
-        this.handleLogin = this.handleLogin.bind(this)
-        this.handleLogout = this.handleLogout.bind(this)
-      }
-      handleLogin(){
-        this.setState((state) => {
-          return {isLogin: true}
-        })
-      }
-      handleLogout(){
-        this.setState((state) => {
-          return {isLogin: false}
-        })
-      }
-      render(){
-        const isLogin = this.state.isLogin
-        let button
-        if(isLogin) {
-          button = <LogoutButton onClick={this.handleLogout} />
-        } else {
-          button = <LoginButton onClick={this.handleLogin} />
-        }
-
-        return (
-          <div>{button}</div>
-        )
-      }
-    }
+    const numbers = [1,2,3,4]
     ReactDOM.render(
-      <Page />,
-      document.getElementById('root')
+        <NumberList numbers={numbers}/>,
+        document.getElementById('root')
     )
+
 
 
 
