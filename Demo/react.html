@@ -15,18 +15,8 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    function NumberList (props) {
-      const arr = props.numbers
-      const itemList = arr.map((number) => {
-          return (<li key={number.toString()}>{number}</li>)
-      })
-      return (<ul>{itemList}</ul>)
-    }
-    const numbers = [1,2,3,4]
-    ReactDOM.render(
-        <NumberList numbers={numbers}/>,
-        document.getElementById('root')
-    )
+    ReactDOM.render(<input value="hi" />,
+    document.getElementById('root'));
 
 
 
