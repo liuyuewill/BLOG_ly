@@ -33,7 +33,7 @@
         this.changeInputVal = this.changeInputVal.bind(this)
       }
       changeInputVal (e) {
-        this.props.onChange(e)
+        this.props.onChangeInput(e.target.value)
       }
       render () {
         let type = this.props.type
@@ -49,25 +49,15 @@
     class Calcular extends React.Component{
       constructor(props) {
         super(props)
-        this.state = {type: 'A', valA: 1, valB: 2}
+        this.state = {type: 'A', valA: '', valB: ''}
         this.changeTypeA = this.changeTypeA.bind(this)
         this.changeTypeB = this.changeTypeB.bind(this)
       }
-      changeTypeA(e){
-        console.log('e', e.target, e.target.value);
-        this.setState((state) => ({
-          type: 'A',
-          valA: +e.target.value,
-          valB: (+(e.target.value))*2
-        }))
-        console.log('this.state', this.state);
+      changeTypeA(valA){
+        this.setState({type: 'A', valA, valB: (+valA)*2})
       }
-      changeTypeB(e){
-        this.setState((state) => ({
-          type: 'B',
-          valB: e.target.value,
-          valA: (+(e.target.value))/2
-        }))
+      changeTypeB(valB){
+        this.setState({type: 'B', valB, valA: ((+valB)/2)})
       }
 
       render(){
@@ -75,8 +65,8 @@
 
         return (
           <div>
-            <InputSth type={inputType} value={this.state.valA} onChange={this.changeTypeA} />
-            <InputSth type={inputType} value={this.state.valB} onChange={this.changeTypeB} />
+            <InputSth type={inputType} value={this.state.valA} onChangeInput={this.changeTypeA} />
+            <InputSth type={inputType} value={this.state.valB} onChangeInput={this.changeTypeB} />
             <Display fitstVal={this.state.valA}/>
           </div>
         )
