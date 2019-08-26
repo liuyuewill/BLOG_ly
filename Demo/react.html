@@ -15,66 +15,12 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    
-
-    function Display(props) {
-      let dom
-      if (props.fitstVal > 3){
-        dom = <p>大于3</p>
-      } else {
-        dom = <p>小于等于3</p>
-      }
-      return dom
-    }
-
-    class InputSth extends React.Component{
-      constructor(props){
-        super(props)
-        this.changeInputVal = this.changeInputVal.bind(this)
-      }
-      changeInputVal (e) {
-        this.props.onChangeInput(e.target.value)
-      }
-      render () {
-        let type = this.props.type
-        return (
-          <div>
-            {type}
-            <input value={this.props.value} onChange={this.changeInputVal} />
-          </div>
-        )
-      }
-    }
-
-    class Calcular extends React.Component{
-      constructor(props) {
-        super(props)
-        this.state = {type: 'A', valA: '', valB: ''}
-        this.changeTypeA = this.changeTypeA.bind(this)
-        this.changeTypeB = this.changeTypeB.bind(this)
-      }
-      changeTypeA(valA){
-        this.setState({type: 'A', valA, valB: (+valA)*2})
-      }
-      changeTypeB(valB){
-        this.setState({type: 'B', valB, valA: ((+valB)/2)})
-      }
-
-      render(){
-        let inputType = this.state.inputType
-
-        return (
-          <div>
-            <InputSth type={inputType} value={this.state.valA} onChangeInput={this.changeTypeA} />
-            <InputSth type={inputType} value={this.state.valB} onChangeInput={this.changeTypeB} />
-            <Display fitstVal={this.state.valA}/>
-          </div>
-        )
-      }
+    function ProductTable(props){
+      
     }
 
     ReactDOM.render(
-      <Calcular />,
+      <WelcomeDialog />,
       document.getElementById('root')
     );
 
