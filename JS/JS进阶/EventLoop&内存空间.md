@@ -1,7 +1,7 @@
 ### 事件循环
 - 浏览器是多进程的
 - JS是单线程的，此单线程中拥有唯一的事件循环，事件循环中的队列可以有多个
-- JavaScript代码的执行过程中，除了依靠函数调用栈来搞定函数的执行顺序外，还依靠任务队列(task queue)来搞定另外一些代码的执行
+- JavaScript代码的执行过程中，除了依靠`函数调用栈`来搞定函数的执行顺序外，还依靠`任务队列`(task queue)来搞定另外一些代码的执行
 - 队列：先进先出
   - macro-task宏任务：script(整体代码), setTimeout队列, setInterval队列, setImmediate, I/O, UI rendering。
   - micro-task微任务：process.nextTick, Promise队列, Object.observe(已废弃), MutationObserver(html5新特性)
