@@ -12,7 +12,7 @@
 
         先去目标分支dev：git checkout dev
         以哪个为基master，git rebase 基: git rebase master
-
+    
         结果：
         - dev分支上的提交c1，会接在master上的c0上，Head会指向dev分支的c1。即c0 -> c1
         - master分支呢，记录还是老记录，因为你根本没它合并/rebase了任何东西。
@@ -29,7 +29,7 @@
 
         1、git pull = git fetch + git merge
         2、git pull --rebase = git fetch + git rebase
-
+    
         3、使用git pull --rebase注意：
         - 必须保持本地目录干净：
                 - 如果本次修改已经完成，则可以先提交（commit）一下
@@ -39,7 +39,7 @@
                 $ git rebase --continue
                 或放弃解决冲突
                 git rebase --abort 放弃本次 rebase 操作
-
+    
         建议
         $ git stash
         $ git pull --rebase
