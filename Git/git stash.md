@@ -1,7 +1,10 @@
 ### git stash
-保存当前工作进度，会把暂存区和工作区的改动保存起来。然后，git s，会发现当前是一个干净的工作区。
+保存当前工作进度，会把【暂存区】和【工作区】的改动保存起来。然后，git s，会发现当前是一个干净的工作区。
 
-使用git stash save 'message...'可以添加一些注释
+### git stash save 'message...'
+
+添加注释
+
 ### git stash list
 显示保存进度的列表
 ### git stash pop [–index] [stash_id]
