@@ -1,3 +1,10 @@
+Ajax跨域的三种方式：
+
+- CORS
+- JSONP
+- Websocket
+
+
 
 ### CORS
 
@@ -107,4 +114,49 @@ CORS请求分为2种：
 ### JSONP
 
 没有CORS强大，缺陷：只支持GET请求
+
+```JS
+function createScriptTag(url){
+  const tag = document.createElement('script')
+  tag.setAttribute('type', 'text/javascript')
+  tag.src = url
+  document.body.appendChild(tag)
+}
+
+window.onload = function(){
+  createScriptTag('http://example.com/ip?callback=foo')
+}
+
+function foo(data) { // data为跨域传回来的数据
+  
+}
+```
+
+
+
+### Websocket
+
+一种通信协议，协议前缀：ws://   或 wss://，只要服务器支持就可以
+
+学习路径：http://www.ruanyifeng.com/blog/2017/05/websocket.html
+
+```JS
+var ws = new WebSocket("wss://echo.websocket.org");
+
+ws.onopen = function(evt) { 
+  console.log("Connection open ..."); 
+  ws.send("Hello WebSockets!");
+};
+
+ws.send('your message');
+
+ws.onmessage = function(evt) {
+  console.log( "Received Message: " + evt.data);
+  ws.close();
+};
+
+ws.onclose = function(evt) {
+  console.log("Connection closed.");
+}; 
+```
 

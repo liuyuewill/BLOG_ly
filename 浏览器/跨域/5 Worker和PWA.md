@@ -1,41 +1,3 @@
-## LocalStorage 和 IndexDB规避同源的方法
-
-### PostMessage （HTML5的API）
-
-- 发送数据
-
-```JS
-otherWindow.postMessage(message, targetOrigin, [transfer]);o
-
-otherWindow: 窗口的引用
-- iframe的contentWindow属性
-- 执行window.open返回的窗口对象
-- window.frames
-
-```
-
-- 接收消息
-
-```JS
-监听message事件的发生
-
-window.addEventListener("message", receiveMessage, false) ;
-
-function receiveMessage(event) {
-     var origin= event.origin;
-     console.log(event);
-}
-event的几个常用属性：
-- data :   指的是从其他窗口发送过来的消息对象;
-- type:   指的是发送消息的类型;
-- source:   指的是发送消息的窗口对象;
-- origin:  指的是发送消息的窗口的源
-```
-
-
-
-## 相关拓展学习
-
 ### WebWorker
 
 - 开一个新线程，不会干扰用户界面
@@ -59,7 +21,6 @@ event的几个常用属性：
   
 
   ```JS
-  
   /* main.js */
   // 创建 worker
   const myWorker = new Worker('worker.js');
@@ -102,7 +63,6 @@ event的几个常用属性：
 - 只要它被安装且被激活，service worker就可以拦截主文档中发起的任何网络请求
 
 ```JS
-
 /* main.js */
 // 注册
 navigator.serviceWorker.register('/service-worker.js');
@@ -136,17 +96,30 @@ self.addEventListener('fetch', function(event) { // 只要一被拦截，service
 - pwa将web和app的优势融合在一起：渐进式、可响应、可离线、实现类似 `App` 的交互、即时更新、安全、可以被搜索引擎检索、可推送、可安装、可链接
 - Pwa不是指某项技术，而是指应用了多项技术的Web App. **其核心技术包括 App Manifest、Service Worker、Web Push，等等。**
 
-native app缺点：内容无法被索引、必须下载安装包等
 
-web端缺点：卡顿、离线时用户无法访问、无法接受消息推送、移动端无一级入口。（虽然前端做了很多努力：virtual dom/spa/混合编程等）
+
+native app和web端各自缺点：
+
+```JS
+1、native app缺点：内容无法被索引、必须下载安装包等
+
+2、web端缺点：卡顿、离线时用户无法访问、无法接受消息推送、移动端无一级入口。（虽然前端做了很多努力：virtual dom/spa/混合编程等）
+```
+
+
 
 pwa就致力于提升Web App性能，改善用户体验
 
 ```JS
-PWA应用可安装：指的是可以像原生APP在主屏幕上留有图标
+PWA应用优点：
+1、可安装：可以像原生APP在主屏幕上留有图标
+	需要提供manifest.json文件，在html里引用它，
+	<link rel="manifest" href="/manifest.json">
+2、离线使用：Service Worker,使得可以像Native APP那样可以离线使用、消息推送
 ```
 
-
+- 国内案例：豆瓣、饿了么
+- 国外：Twitter(2017年就使用此技术，获得大量的用户)
 
 
 
