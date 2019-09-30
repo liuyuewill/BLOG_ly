@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .outer {
+      padding: 30px;
+      background-color: aqua;
+
+    }
+
+    .inner {
+      height: 100px;
+      background-color: brown;
+    }
+  </style>
+</head>
+
+</html>
+<body>
+  <div class="outer">outer
+    <div class="inner">inner</div>
+  </div>
+  <script>
+    var outer = document.querySelector('.outer');
+    var inner = document.querySelector('.inner');
+
+    // Let's listen for attribute changes on the
+    // outer element
+    new MutationObserver(function () {
+      console.log('mutate');
+    }).observe(outer, {
+      attributes: true
+    });
+
+    // Here's a click listener…
+    function onClick() {
+      console.log('click');
+
+      setTimeout(function () {
+        console.log('timeout');
+      }, 0);
+
+      Promise.resolve().then(function () {
+        console.log('promise');
+      });
+
+      outer.setAttribute('data-random', Math.random());
+    }
+
+    // …which we'll attach to both elements
+    inner.addEventListener('click', onClick);
+    outer.addEventListener('click', onClick);
+    inner.click()
+  </script>
+</body>
