@@ -51,8 +51,45 @@
 
 #### 5、箭头函数
 - 无arguments，要用就用reset参数
-- 根本没有自己的this，导致内部this就是外层代码的this
-- 对象本身不构成作用域
+  ```JS
+  const numbers = (...nums) => nums;
+
+  numbers(1, 2, 3, 4, 5)
+  // [1,2,3,4,5]
+
+  const headAndTail = (head, ...tail) => [head, tail];
+
+  headAndTail(1, 2, 3, 4, 5)
+  // [1,[2,3,4,5]]
+
+
+  以下三个变量在箭头函数之中都不存在，
+  如果在箭头函数里使用，则指向外层函数的对应变量：
+  arguments、super、new.target
+
+- 函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+  ```JS
+  根本没有自己的this，导致内部this就是外层代码的this
+  也因为自己根本没有this，所以不能用作构造函数
+    this.s1 = 0;
+    this.s2 = 0;
+    // 箭头函数
+    setInterval(() => this.s1++, 1000); // this指向实例
+    // 普通函数
+    setInterval(function () { // this指向全局
+        this.s2++;
+      }, 1000);
+    }
+
+    var timer = new Timer();
+
+    setTimeout(() => console.log('s1: ', timer.s1), 3100);
+    setTimeout(() => console.log('s2: ', timer.s2), 3100);
+    // s1: 3
+    // s2: 0
+
+  箭头函数可以让this指向固定化，这种特性很有利于封装回调函数
+- 对象本身不构成作用域。所以像下面这种写法，是错误的
 
       const cat = {
         lives: 9,
