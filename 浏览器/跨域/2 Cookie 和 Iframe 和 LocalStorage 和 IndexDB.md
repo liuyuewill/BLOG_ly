@@ -1,4 +1,4 @@
-## Cookie 和 Iframe 和 LocalStorage 和 IndexDB规避同源策略的方法
+## Cookie 和 Iframe 和 LocalStorage 和 IndexDB 规避同源策略的方法
 
 Cookie是通过响应头里set-cookie种在浏览器里的，下回浏览器请求头里就会带上Cookie字段
 
