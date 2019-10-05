@@ -1,4 +1,4 @@
-### Q: async函数返回什么
+### Q： async函数返回什么
 #### A：一个 Promise 对象。
 
 async 函数 return 出的值，会成为 then 的参数
@@ -39,8 +39,9 @@ await命令后面是一个 Promise 对象，返回该对象的结果。如果不
     即：
     await + promise对象 得到的值 是promise 对象 resolve出的东西
 ### Q：如果有一个 await 后的 Promise 最终状态是 rejected，会发生什么
-整个 async 函数都会停止执行。
+#### A：整个 async 函数都会停止执行。
 那如果想要： 第一个异步就算失败，也希望后面的异步继续执行，怎么办
+
 - 法一：用 try {...} catch (e) {...}
 - 法二：await 后面的 Promise 自己就要带上 catch
 ```JS
@@ -136,7 +137,7 @@ async function logInOrder(urls) {
 
   ![image-20191004233025176](/Users/liuyue/Library/Application Support/typora-user-images/image-20191004233025176.png)
 
-### async/awati 要配套使用
+### async/await 要配套使用
 
 ```JS
 经常会出现这种写法：

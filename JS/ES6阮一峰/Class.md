@@ -46,9 +46,9 @@
   只能通过当前这个 类 来调用 。
 
   ```JS
-  可以直接在Foo类上调用（Foo.classMethod()），而不是在Foo类的实例上调用
+  Foo.classMethod()，而不是在 Foo类的实例 上调用
   
-  静态方法包含this关键字，这个this指的是类，而不是实例
+  静态方法包含 this 关键字，这个 this 指的是类，而不是实例
   ```
 
 - 实例属性的位置
@@ -100,7 +100,7 @@ class ColorPoint extends Point {
 }
 
 // super 表示【父类的构造函数】，用来新建父类的 this 对象
-// 只有super方法才能调用父类实例, 在调用 super 之前，无法使用 this
+// 只有super方法才能调用父类原型里的方法, 在调用 super 之前，无法使用 this
 
 ES5 ES6 继承的区别：
 ES5 : 先创建一个实例对象 this ，再把父类的属性、方法挂在这个 this 对象上 Parent.apply(this)
