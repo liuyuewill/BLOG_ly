@@ -1,10 +1,10 @@
-### 第一步：最外层router.js里
+### 第一步：最外层 router.js 里
 
     import Vue from 'vue'
     import store from '@/store'
     import Router from 'vue-router'
     import { LoadingBar } from 'iview'
-
+    
     import Main from '@/components/Main'
     import aRoutes from '@/modules/apage/routes'
     import bRoutes from '@/modules/bpage/routes'
@@ -32,9 +32,9 @@
         ...bRoutes,
       ]
     }
-
+    
     ----------------------------------------------------
-
+    
     // 路由表2
     // 全屏页面的路由
     const fullScreenRoutes路由表2 = [{
@@ -42,9 +42,9 @@
       name: 'not_found',
       component: NotFoundPage
     }]
-
+    
     ----------------------------------------------------
-
+    
     // 全面注册
     const router = new Router({
       routes: [
@@ -52,7 +52,7 @@
         ...fullScreenRoutes路由表2
       ]
     })
-
+    
     // 路由守卫一下
     router.beforeEach((to, from, next) => {
       if (符合某种条件) {
@@ -67,7 +67,7 @@
     router.afterEach(route => {
       LoadingBar.finish()
     })
-
+    
     export default router
 ### 第二步 在自己的模块文件夹下
 
