@@ -23,6 +23,13 @@
 
   ```JS
   法一： 箭头函数
+  class Obj {
+    constructor() {
+      this.getThis = () => this; // 把函数定义在 constructor 内，箭头函数定义生效的时候是在 constructor函数执行时，箭头函数所在的运行环境，肯定是实例对象，所以this会总是指向实例对象。
+    }
+  }
+  
+  
   法二： 在 constructor 里显式绑定
   class Logger {
     constructor() {
@@ -95,7 +102,7 @@ class ColorPoint extends Point {
   }
 
   toString() {
-    return this.color + ' ' + super.toString(); // super, 调用父类的 toString()
+    return this.color + ' ' + super.toString(); // super, 调用父类原型上的 toString()
   }
 }
 
@@ -168,7 +175,7 @@ Object.setPrototypeOf(obj, proto);
   - 若foo为方法：Object.getPrototypeOf(this).foo.call(this) // 注意第二个this
 ```
 
-```
+```js
   例子：
   const proto = {
     x: 'hello',

@@ -1,3 +1,26 @@
+特别重要：
+
+- 异步
+- ES6
+- promise
+- eventloop
+- 闭包
+- 跨域
+- 安全/http/https/http2/session/浏览器工作原理
+- 设计模式
+- hybrid
+- mapp核心
+- cli 脚手架
+- 算法：hash、快排
+- TS
+- React 原理
+
+
+
+
+
+
+
 > vue
 - vue
 - 生命周期
