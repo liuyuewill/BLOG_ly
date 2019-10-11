@@ -1,6 +1,7 @@
 特别重要：
 
 - 异步
+- 原型链、继承
 - ES6
 - promise
 - eventloop

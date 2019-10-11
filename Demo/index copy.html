@@ -6,26 +6,31 @@
   <div id="loginBtn">click</div>
   <div id="backAction">backAction</div>
   <script>
-    var str = new String("hi");
+      setTimeout(() => {
+        console.log('st1', );
+        new Promise(function (resolve,reject) {
+          console.log('p2', );
+          resolve()
+        }).then(() => {
+          console.log('p2-then', );
+        })
+      });
+      
 
-    [...str] // ["h", "i"]
+      new Promise(function (resolve,reject) {
+        console.log('p1', );
+        resolve()
+      }).then(() => {
+        console.log('p1-then', );
+      })
 
-    str[Symbol.iterator] = function() {
-      return {
-        next: function() {
-          console.log('this', this);
-          if (this._first) {
-            this._first = false;
-            return { value: "bye", done: false };
-          } else {
-            return { done: true };
-          }
-        },
-        _first: true
-      };
-    };
 
-    [...str] // ["bye"]
+      setTimeout(() => {
+        console.log('st2', );
+      });
+      
+
+
   </script>
 </body>
 </html>
