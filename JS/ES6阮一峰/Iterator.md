@@ -99,7 +99,9 @@ function makeIterator(array) {
   方法：手动加一个遍历器呗！！把 Symbol.iterator 这个属性加到对象自身或者原型链上
 
   ```JS
-  如果是类数组，你可以 通过借用如： [Symbol.iterator]: Array.prototype[Symbol.iterator]，注：普通对象部署数组的Symbol.iterator方法，并无效果
+  如果是类数组
+  法一：你可以 通过借用如： [Symbol.iterator]: Array.prototype[Symbol.iterator]，注：普通对象(指没有数字键和length属性的对象)部署数组的Symbol.iterator方法，并无效果
+  法二：通过Array.from()转成真数组就可以了嘛
   ```
 
   
@@ -120,3 +122,114 @@ function makeIterator(array) {
 
 ### 字符串是一个类似数组的对象，也原生具有 Iterator 接口
 
+### Iterator 接口与 Generator 函数 ??
+
+### 遍历器函数最终返回的遍历器对象，除了有 next 方法，还可以具有`return`方法和`throw`方法
+
+return 场景：如果`for...of`循环提前退出（通常是因为出错，或者有`break`语句），就会调用`return`方法。如果一个对象在完成遍历前，需要清理或释放资源，就可以部署`return`方法
+
+```JS
+function readLinesSync(file) {
+  return {
+    [Symbol.iterator]() {
+      return {
+        next() {
+          return { done: false };
+        },
+        return() {
+          file.close();
+          return { done: true };
+        }
+      };
+    },
+  };
+}
+
+触发return:
+// 情况一:输出文件的第一行以后，就会执行return方法，关闭这个文件
+for (let line of readLinesSync(fileName)) {
+  console.log(line);
+  break;
+}
+
+// 情况二:在执行return方法关闭文件之后，再抛出错误
+for (let line of readLinesSync(fileName)) {
+  console.log(line);
+  throw new Error();
+}
+```
+
+### for - of
+
+再重复一遍：只要数组结构部署了 Symbol.iterator 属性，就是部署了 iterator 接口，就可以用 for of 来遍历。其本质就是调用内部的[Symbol.iterator]指向的函数（叫遍历器函数），返回遍历器对象（此对象里有个next方法）
+
+- for(let item of arr)  可以与`break`、`continue`和`return`配合使用
+
+- arr.forEach(function(item,i){ })  无法中途跳出`forEach`循环，`break`命令或`return`命令都不能奏效。
+
+- for - in
+
+  本质：只能遍历key
+
+  ```JS
+  var arr = ['a', 'b', 'c', 'd'];
+  
+  for (let a in arr) {
+    console.log(a); // 0 1 2 3
+  }
+  
+  for (let a of arr) {
+    console.log(a); // a b c d
+  }
+  ```
+
+- 如果你非要用 for-of 来遍历对象，可以
+
+  ```JS
+  法一：和 Object.keys()或Object.entries()配合使用
+  const obj = { foo: 'bar', baz: 42 };
+  Object.entries(obj)
+  // [ ["foo", "bar"], ["baz", 42] ]
+  
+  
+  法二：使用 Generator 函数将对象重新包装一下
+  function* entries(obj) {
+    for (let key of Object.keys(obj)) {
+      yield [key, obj[key]];
+    }
+  }
+  
+  for (let [key, value] of entries(obj)) {
+    console.log(key, '->', value);
+  }
+  // a -> 1
+  // b -> 2
+  // c -> 3
+  
+  ------------------------------------------------
+  
+  
+  // for...of循环调用遍历器接口，数组的遍历器接口只返回具有数字索引的属性。这一点跟for...in循环也不一样。
+  let arr = [3, 5, 7];
+  arr.foo = 'hello';
+  
+  for (let i in arr) {
+    console.log(i); // "0", "1", "2", "foo"
+  }
+  
+  for (let i of arr) {
+    console.log(i); //  "3", "5", "7"(3所有数字索引0，5具有数字索引1……所以这些属性会被返回，但foo没有数字索引)
+  }
+  ```
+
+### 计算生成的数据结构
+
+有些数据结构是在现有数据结构的基础上，计算生成的。如ES6 的数组、Set、Map 都部署了以下三个方法
+
+调用后都返回遍历器对象。
+
+- entries()
+- values()
+- keys()
+
+### 类数组的本质特征是有length属性
