@@ -30,7 +30,7 @@ getStockPriceByName('goog').then(function (result) {
 
 
 
-### Q：await命令返回什么
+### Q：await 命令返回什么
 
 #### A：await 后面跟的 promise 对象 resolve 出来的值
 
