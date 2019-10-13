@@ -62,7 +62,7 @@ CORS请求分为2种：
 
   ```JS
   简单请求过程：
-  在请求头里加个字段Origin: http://api.bob.com  本次请求来自哪个源（协议 + 域名 + 端口）
+  在请求头里加个字段 Origin: http://api.bob.com  本次请求来自哪个源（协议 + 域名 + 端口）
   1、Origin源不通过 -> 正常的HTTP回应 -> 响应头里无Access-Control-Allow-Origin字段 -> 抛出一个错误,被XMLHttpRequest的onerror回调函数捕获（状态码有可能是200）
   
   2、Origin源通过 -> 响应头里多出几外字段均以Access-Control- 开头：

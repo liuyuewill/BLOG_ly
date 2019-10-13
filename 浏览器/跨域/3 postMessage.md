@@ -3,7 +3,7 @@
 - 发送数据
 
 ```JS
-otherWindow.postMessage(message, targetOrigin, [transfer]);o
+otherWindow.postMessage(message, targetOrigin, [transfer]);
 
 otherWindow: 窗口的引用
 - iframe的contentWindow属性
