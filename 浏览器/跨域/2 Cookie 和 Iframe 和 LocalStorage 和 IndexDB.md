@@ -19,7 +19,7 @@ Cookie是通过响应头里set-cookie种在浏览器里的，下回浏览器请�
 这种方法只适用于 Cookie 和 iframe 窗口
 ```
 
-- 法二：服务器也可以在设置Cookie时指定Cookie的所属域名为一级域名
+- 法二：服务器也可以在设置Cookie时指定Cookie的所属域名为二级域名
 
 ```JS
 Set-Cookie: key=value; domain=.example.com; path=/
