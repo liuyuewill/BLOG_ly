@@ -39,6 +39,11 @@ function makeIterator(array) {
 
 知识点：
 我们平时在for循环里常写地是 i++, 是先计算表达式的值，再自身加1，++i是正好相反的
+var i = 0;
+var a = i++; // i = 1  a = 0
+
+var i =0;
+var a = ++i; // i = 1 a = 1
 ```
 
 ### 默认的 Iterator 接口
@@ -67,7 +72,7 @@ function makeIterator(array) {
   小结：凡是部署了Symbol.iterator属性的数据结构，就称为部署了遍历器接口。调用这个接口，就会返回一个遍历器对象。
   ```
 
-- 原生具备 Iterator接口的数组结构：
+- 原生具备 Iterator接口的数据结构：
 
   - Array (没有对象，所以数组可以用for of遍历，但对象不能用for of)
 
@@ -122,7 +127,13 @@ function makeIterator(array) {
 
 ### 字符串是一个类似数组的对象，也原生具有 Iterator 接口
 
-### Iterator 接口与 Generator 函数 ??
+### Iterator 接口与 Generator 函数
+```JS
+Symbol.iterator方法怎么写呢
+其实就是一个 generator 函数
+
+复习：此函数返回一个遍历器对象，此对象里有每一个遍历的成员，还有一个 next 方法，每调用一次 next 方法，指针就会指向遍历器对象的下一个成员，并且返回{value:... , done: false/true}
+```
 
 ### 遍历器函数最终返回的遍历器对象，除了有 next 方法，还可以具有`return`方法和`throw`方法
 
@@ -163,7 +174,7 @@ for (let line of readLinesSync(fileName)) {
 
 再重复一遍：只要数组结构部署了 Symbol.iterator 属性，就是部署了 iterator 接口，就可以用 for of 来遍历。其本质就是调用内部的[Symbol.iterator]指向的函数（叫遍历器函数），返回遍历器对象（此对象里有个next方法）
 
-- for(let item of arr)  可以与`break`、`continue`和`return`配合使用
+- for(let item of arr)  可以与`break`、`continue`和`return`配合使用。！！！！特别重要
 
 - arr.forEach(function(item,i){ })  无法中途跳出`forEach`循环，`break`命令或`return`命令都不能奏效。
 

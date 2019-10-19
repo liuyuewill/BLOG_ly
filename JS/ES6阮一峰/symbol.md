@@ -32,27 +32,28 @@ for...in、for...of循环中，
 ### 应用场景
 - 为对象定义一些非私有的、但又希望只用于内部的方法
 - 单例模式时，需要将一个实例挂在某个变量上面，如果害怕被改写，就可以考虑用symbol值作为对象的key
+```JS
+  // mod.js
+  function A() {
+    this.foo = 'hello';
+  }
+  if (!global._foo) {
+    global._foo = new A();
+  }
+  module.exports = global._foo;
 
-      // mod.js
-      function A() {
-        this.foo = 'hello';
-      }
-      if (!global._foo) {
-        global._foo = new A();
-      }
-      module.exports = global._foo;
-
-      但在其他文件中，global._foo = { foo: 'world' };像这样，很容易被改写
+  但在其他文件中，global._foo = { foo: 'world' };像这样，很容易被改写
 
 
 
-      优化：
-      // mod.js
-      const FOO_KEY = Symbol('foo');
-      function A() {
-        this.foo = 'hello';
-      }
-      if (!global._foo) {
-        global[FOO_KEY] = new A();
-      }
-      module.exports = global[FOO_KEY];
+  优化：
+  // mod.js
+  const FOO_KEY = Symbol('foo');
+  function A() {
+    this.foo = 'hello';
+  }
+  if (!global._foo) {
+    global[FOO_KEY] = new A();
+  }
+  module.exports = global[FOO_KEY];
+      ```
