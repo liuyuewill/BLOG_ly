@@ -18,7 +18,11 @@
 
 ```js
 （function(){
-  function _webapck_require_(moduleId) {
+  
+  // _webapck_require_函数做了两件事
+  // 1、定义一个模块加载函数 webpack_require。
+	// 2、使用加载函数加载入口模块 “./src/index.js”。
+  function _webapck_require_(moduleId) { // 专业名词：模块加载函数
     
     // entry.js（）函数会执行，并且会把 _webapck_require_ 函数传进 entry.js 函数, 当遇到 import 的时候，再 执行_webapck_require_（被import的文件的moduleId），依次执行下去，就会从 entry.js 文件开始并且执行完所有依赖文件，即 bundle.js 参数里的所有文件被执行
   }
