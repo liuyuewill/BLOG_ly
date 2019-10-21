@@ -30,7 +30,7 @@
 2. 全局安装nrm：管理npm仓库的软件，可快速切换npm仓库
 
 ```
-nrm //展示nrm可用命令
+ nrm //展示nrm可用命令
  nrm ls //列出已经配置的所有仓库
  nrm test //测试所有仓库的响应时间
  nrm add <registry> <url> //新增仓库
