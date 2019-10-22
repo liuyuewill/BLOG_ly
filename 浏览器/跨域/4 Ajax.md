@@ -20,7 +20,8 @@ CORS请求分为2种：
   要同时满足这两点：
   1、请求方法为之一：HEAD/GET/POST
   2、Http的头信息不能超出以下字段：
-  	Accept: 如text/plain
+
+    Accept: 如text/plain
     Accept-Language: 如en-US
     Content-Language：
     Last-Event-ID:
