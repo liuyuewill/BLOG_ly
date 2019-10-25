@@ -128,6 +128,8 @@ Alfred 默认提供计算的能力
 静音： mute
 
 ---
+补充：
+
 win快捷键：
 shift+delete彻底删除，垃圾箱里都不再有
 
