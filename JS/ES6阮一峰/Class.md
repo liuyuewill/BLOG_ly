@@ -44,6 +44,38 @@
   const logger = new Logger();
   const { printName } = logger;
   printName();
+
+  -------------------------------------------
+  // 思考题
+  window.name = 'window'
+  class A {
+    constructor(){
+      this.name = 'a'
+    }
+    handle(){
+        console.log(this.name)
+    }
+  }
+  let a = new A()
+  let fn1 = a.handle
+  fn1() // ????
+
+
+
+
+  class B {
+    constructor(){
+      this.name = 'b'
+    }
+    handle = () => {
+        console.log(this.name)
+    }
+  }
+  let b = new B()
+  let fn2 = b.handle
+  fn2() // ???
+  setTimeout(fn2, 0) // ???
+
   ```
 
 - static 声明类的静态方法（有一个提案，也用 static 声明类的静态属性）
