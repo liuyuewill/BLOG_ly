@@ -12,21 +12,19 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+
+  </div>
 
   <script type="text/babel">
-    function ProductTable(props){
-      
+    function Welcome(props) {
+      return <h1>Hello, {props.name}</h1>
     }
-
+    const element = <Welcome name='ly' />
     ReactDOM.render(
-      <WelcomeDialog />,
+      element,
       document.getElementById('root')
-    );
-
-
-
-
+    )
   </script>
 </body>
 
