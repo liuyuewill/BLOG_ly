@@ -1,5 +1,4 @@
-function sayHello(person) {
-    return 'Hello, ' + person;
-}
-var user = 'Tom';
-console.log(sayHello(user));
+var anyThing = 'Tom';
+anyThing.setName('Jerry');
+anyThing.setName('Jerry').sayHello();
+anyThing.myName.setFirstName('Cat');

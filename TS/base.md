@@ -10,7 +10,11 @@
 - 用 `:` 指定变量的类型，`:` 的前后有没有空格都可以
 - TS 只会进行静态检查，错误会在编译时就报出来。即使编译报错，还是会生成对应的编译文件。如果要在报错的时候终止 js 文件的生成，可以在 `tsconfig.json` 中配置 `noEmitOnError` 即可
 
-## 语法基础
+# 语法基础
+
+----
+
+## 明确指定变量类型
 
 #### 原始数据类型
 
@@ -41,7 +45,6 @@
 
   ```JS
   let decLiteral: number = 6;
-  
   编译之后为： var decLiteral = 6;
   ```
 
@@ -55,7 +58,11 @@
   }
   ```
 
-#### 任意值 any: 表示允许赋值为任意类型
+---
+
+## 未明确指定变量类型
+
+#### 任意值 any：表示允许赋值为任意类型
 
 ```js
 let myFavoriteNumber: string = 'seven';
@@ -66,4 +73,60 @@ myFavoriteNumber = 7; // 不报错
 ```
 
 - 任意值的 属性 和 方法：都能随便调用。对任意值的任何操作，返回的内容的类型都是任意值。
+
+  ```JS
+  let anyThing: any = 'Tom';
+  anyThing.setName('Jerry');
+  anyThing.setName('Jerry').sayHello();
+  anyThing.myName.setFirstName('Cat');
+  ```
+
+#### 变量在声明时（不管之后有没有赋值），未指定类型：则默认为 any。 
+
+```JS
+let something; // 相当于 let something:any;
+something = 'seven';
+something = 7;
+
+something.setName('Tom');
+```
+
+### 类型推论：如果没有明确指定类型，TS 会根据类型推论推断出一个类型
+
+- 什么才叫没有明确指明：
+  - 直接声明 + 赋值（注：只声明，会变成any)
+  - 联合类型
+
+```JS
+let myFavoriteNumber = 'seven'; // 声明 + 赋值
+myFavoriteNumber = 7; // 会报错
+
+
+let myFavoriteNumber: string | number;
+myFavoriteNumber = 'seven';
+console.log(myFavoriteNumber.length); // 先类型推论为 string，再 5
+myFavoriteNumber = 7;
+console.log(myFavoriteNumber.length); // 先类型推论为 number, 再编译时报错
+```
+
+---
+
+
+
+### 联合类型：用 | 分隔，表示取值可以为多种类型中的一种
+
+```JS
+let myFavoriteNumber: string | number; // 只能这 2 种类型之一，不能为其他类型
+myFavoriteNumber = 'seven';
+myFavoriteNumber = 7;
+
+// 当 TS 不确定联合类型的变量 到底是哪一个类型时，我们只能访问此联合类型 的所有类型里 共同的属性和方法
+function getLength(something: string | number): number { // ：number 是此函数返回值类型的声明
+    return something.length; // 就会报错，因为 number 没有 length 属性
+}
+```
+
+
+
+
 
