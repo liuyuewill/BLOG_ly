@@ -58,8 +58,7 @@ tab之间切换： ctrl + tab
 
 ---
 自定义：
-打开微信： cmd+’
-打开企业微信： cmd+；
+打开微信： cmd+.
 显示meau bar的全部：cmd+shift+空格
 
 ---
