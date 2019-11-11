@@ -1,4 +1,4 @@
-- 打tag
+- 打 tag
 
 - eslint
 
@@ -19,5 +19,3 @@
 
 - toString
 - valueOf
-
-
