@@ -14,40 +14,41 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      function WarningBanner(props) {
-        if (!props.warn) {
-          return null;
-        }
-
-        return <div className="warning">Warning!</div>;
-      }
-
-      class Page extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { showWarning: true };
-          this.handleToggleClick = this.handleToggleClick.bind(this);
-        }
-
-        handleToggleClick() {
-          this.setState(state => ({
-            showWarning: !state.showWarning,
-          }));
-        }
-
+      class TodoListView extends React.Component {
         render() {
           return (
             <div>
-              <WarningBanner warn={this.state.showWarning} />
-              <button onClick={this.handleToggleClick}>
-                {this.state.showWarning ? 'Hide' : 'Show'}
-              </button>
+              <ul>
+                {this.props.todoList.todos.map(todo => (
+                  <TodoView todo={todo} key={todo.id} />
+                ))}
+              </ul>
             </div>
           );
         }
       }
 
-      ReactDOM.render(<Page />, document.getElementById('root'));
+      const TodoView = observer(({ todo }) => (
+        <li>
+          <input
+            type="checkbox"
+            checked={todo.finished}
+            onClick={() => (todo.finished = !todo.finished)}
+          />
+          {todo.title}
+        </li>
+      ));
+
+      const store = {
+        todos: [id:0, len: 0, finished: 'no'],
+        todos: [id:1, len: 1, finished: 'no'],
+        todos: [id:2, len: 2, finished: 'no'],
+        todos: [id:3, len: 3, finished: 'yes'],
+      };
+      ReactDOM.render(
+        <TodoListView todoList={store} />,
+        document.getElementById("root")
+      );
     </script>
   </body>
 </html>
