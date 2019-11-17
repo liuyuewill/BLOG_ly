@@ -1,3 +1,10 @@
+## 编码写法
+
+- 行为包在一起，用 When
+- 期望包在一起，用 Then
+
+
+
 - 支持了ts 和 众多es6，es7 特性
 
 - testcafe不提供浏览器环境, 只需要在命令行修改浏览器名称。比如 testcafe safari index.js
