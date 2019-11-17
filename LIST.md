@@ -16,14 +16,6 @@
 - TS
 - React 原理
 
-Doing:
-
-- 写个npm包
-- 写个脚手架
-
-
-
-
 
 > vue
 - vue
