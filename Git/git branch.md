@@ -5,7 +5,6 @@
     2. 切换：git checkout feature1(然后 HEAD 就会指向新建的 branch 了)
     
 		合并一步操作：创建+切换，git checkout -b feature1
-    
     创建远程分支(本地分支push到远程)：git push origin feature1
     
     4. 删除：

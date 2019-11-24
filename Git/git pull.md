@@ -13,7 +13,8 @@ git pull使用给定的参数运行 git fetch，并调用 git merge 将检索到
 - 如果远程分支 develop 要与当前分支合并，则冒号后面的部分可以省略
 
   ```JS
-  git pull origin develop
+  git pull origin develop:当前分支   可简写为  git pull origin develop
+  如果远程分支和当前分支是同一分支，可直接写为 git pull
   ```
 
 - git pull
