@@ -9,10 +9,14 @@
 显示保存进度的列表
 ### git stash pop [–index] [stash_id]
 - git stash pop 把【最新那一条的，只有一条】工作区和暂存区的改动【全都恢复到工作区】，并，删除当前进度
-- git stash pop --index 恢复最新的进度到工作区和暂存区
 - git stash pop stash@{1} 恢复指定的进度到工作区
+- git stash pop --index 恢复最新的进度到工作区和暂存区
 
 git stash pop --index貌似比不带 --index更合理
+
+
+
+注意：需要先把 工作区 的东西 放在 暂存区git add . , 才能进行 git stash pop 这个操作
 
 ---
 - git stash apply [–index] [stash_id]
