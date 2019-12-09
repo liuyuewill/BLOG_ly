@@ -1,0 +1,106 @@
+### 匹配器
+
+test函数有两个参数，第一个是case名字，第二个是回调函数
+
+- .toBe(4)
+
+  - `toBe` 使用 `Object.is` 来测试精确相等
+
+  -  相反：expect (a + b).not.toBe(0)
+
+  ```JS
+  test('two plus two is four', () => {
+    expect(2 + 2).toBe(4);
+  });
+  ```
+
+- toEqual
+
+  递归检查对象或数组的每个字段
+
+  ```JS
+  test('object assignment', () => {
+    const data = {one: 1};
+    data['two'] = 2;
+    expect(data).toEqual({one: 1, two: 2});
+  });
+  ```
+
+- Truthiness
+
+  ```js
+  toBeNull 只匹配 null
+  toBeUndefined 只匹配 undefined
+  toBeDefined 与 toBeUndefined 相反
+  toBeTruthy 匹配任何 if 语句为真
+  toBeFalsy 匹配任何 if 语句为假
+  
+  test('zero', () => {
+    const z = 0;
+    expect(z).not.toBeNull();
+    expect(z).toBeDefined();
+    expect(z).not.toBeUndefined();
+    expect(z).not.toBeTruthy();
+    expect(z).toBeFalsy();
+  });
+  ```
+
+- 数字
+
+  ```js
+  test('two plus two', () => {
+    const value = 2 + 2;
+    expect(value).toBeGreaterThan(3);
+    expect(value).toBeGreaterThanOrEqual(3.5);
+    expect(value).toBeLessThan(5);
+    expect(value).toBeLessThanOrEqual(4.5);
+  
+    // toBe and toEqual are equivalent for numbers
+    expect(value).toBe(4);
+    expect(value).toEqual(4);
+  });
+  
+  test('两个浮点数字相加', () => {
+    const value = 0.1 + 0.2;
+    //expect(value).toBe(0.3);           这句会报错，因为浮点数有舍入误差
+    expect(value).toBeCloseTo(0.3); // 这句可以运行
+  });
+  ```
+
+- 字符串
+
+  - toBe
+  - toMatch
+
+  ```JS
+  test('there is no I in team', () => {
+    expect('team').not.toMatch(/I/);
+  });
+  
+  test('but there is a "stop" in Christoph', () => {
+    expect('Christoph').toMatch(/stop/);
+  });
+  ```
+
+- Array & iterable
+
+  - toContain
+
+  ```JS
+  const shoppingList = [
+    'diapers',
+    'kleenex',
+    'trash bags',
+    'paper towels',
+    'beer',
+  ];
+  
+  test('the shopping list has beer on it', () => {
+    expect(shoppingList).toContain('beer');
+    expect(new Set(shoppingList)).toContain('beer');
+  });
+  ```
+
+  
+
+  
