@@ -5,11 +5,18 @@
     2. 切换：git checkout feature1(然后 HEAD 就会指向新建的 branch 了)
     
 		合并一步操作：创建+切换，git checkout -b feature1
-    创建远程分支(本地分支push到远程)：git push origin feature1
+        创建远程分支(本地分支push到远程)：git push origin feature1
     
     4. 删除：
-    本地仓库的分支：git branch -d feature1（特注：HEAD指向的branch不能删，只能先切换到别的分支，再删不是本分支的其他分支
-    远端的分支：git push origin -d feature1
+        本地分支：
+        git branch -d feature1（注：HEAD指向的branch不能删，只能先切换到别分支，再删不是本分支的其他分支)
+
+        远端分支：
+        git push origin -d feature1
+    
+    5. 本地分支重命名(还没有推送到远程)
+        git branch -m oldName newName
+        https://www.jianshu.com/p/cc740394faf5
 ```
 
 ### 手动建立追踪关系
